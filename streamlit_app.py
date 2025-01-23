@@ -51,7 +51,7 @@ with st.expander('Data Visualization'):
     plt.xticks(rotation=45)
     plt.tight_layout()
     st.pyplot(plt)
-    st.plotly_chart(fig)
+    # st.plotly_chart(fig)
 
 
 

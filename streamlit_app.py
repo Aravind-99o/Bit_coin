@@ -21,10 +21,10 @@ with st.expander('Data'):
 
 
 
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 with st.expander('Data visualization'):
-  import seaborn as sns
-  import matplotlib.pyplot as plt
+
 
 
 

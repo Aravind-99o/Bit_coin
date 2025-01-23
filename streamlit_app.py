@@ -21,15 +21,57 @@ with st.expander('Data'):
 
 
 
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 with st.expander('Data visualization'):
-  numeric_df_train = df.select_dtypes(include=[np.number])
+  import seaborn as sns
+  import matplotlib.pyplot as plt
 
-  # Create the heatmap plot
-  plt.figure(figsize=(10, 8))
-  sns.heatmap(numeric_df_train.corr(), annot=True, cmap='coolwarm', fmt='.2f')
-  plt.title('Correlation Heatmap - Training Dataset')
+# Assuming df is the DataFrame containing Bitcoin data
+# For demonstration purposes, let's assume you already have the 'df' dataset loaded.
 
-  # Display the plot in Streamlit
-  st.pyplot(plt)
+# Example: Create a simple DataFrame (replace with actual df)
+df = pd.read_csv("bitcoin_data.csv")  # Replace with the actual CSV file or data
+
+# Convert 'Date' column to datetime if it's not already
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Set the 'Date' as the index for easy plotting
+df.set_index('Date', inplace=True)
+
+# Streamlit title
+st.title('Bitcoin Price Prediction Visualization')
+
+# Display basic information about the dataset
+st.write("Dataset Preview:")
+st.write(df.head())
+
+# Plot a line graph of Bitcoin Closing prices over time
+st.subheader("Bitcoin Close Price Over Time")
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=df.index, y=df['Close'], label='Close Price', color='b')
+plt.title("Bitcoin Close Price Over Time")
+plt.xlabel("Date")
+plt.ylabel("Close Price (USD)")
+plt.xticks(rotation=45)
+plt.tight_layout()
+st.pyplot(plt)
+
+# Plotting the scatter plot for Open vs Close prices
+st.subheader("Open vs Close Price")
+plt.figure(figsize=(10, 5))
+sns.scatterplot(x=df['Open'], y=df['Close'], color='red')
+plt.title("Open vs Close Price")
+plt.xlabel("Open Price (USD)")
+plt.ylabel("Close Price (USD)")
+st.pyplot(plt)
+
+# Plot a line graph for 'Volume' over time (optional)
+st.subheader("Bitcoin Trading Volume Over Time")
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=df.index, y=df['Volume'], label='Volume', color='g')
+plt.title("Bitcoin Trading Volume Over Time")
+plt.xlabel("Date")
+plt.ylabel("Volume")
+plt.xticks(rotation=45)
+plt.tight_layout()
+st.pyplot(plt)

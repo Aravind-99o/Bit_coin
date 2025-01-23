@@ -23,13 +23,6 @@ with st.expander('Data'):
 
 
 with st.expander('Data Visualization'):
-    st.subheader("Open vs Close Price")
-    plt.figure(figsize=(10, 5))
-    sns.scatterplot(x=df['Open'], y=df['Close'], color='red')
-    plt.title("Open vs Close Price")
-    plt.xlabel("Open Price (USD)")
-    plt.ylabel("Close Price (USD)")
-    st.pyplot(plt)
     # Display a line chart for Bitcoin Close prices over time
     st.subheader("Bitcoin Close Price Over Time")
     chart_data = df[['Close']].copy()  # Select only 'Close' column for line chart

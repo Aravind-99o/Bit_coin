@@ -5,7 +5,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-import plotly.graph_objects as go
 
 st.title('Bitcoin Price Prediction')
 
@@ -33,12 +32,6 @@ with st.expander('Data Visualization'):
     chart_data = df[['Close']].copy()  # Select only 'Close' column for line chart
     st.line_chart(chart_data)
 
-with st.expander('Data Visualization'):
-    # Display a line chart for Bitcoin Close prices over time
-    st.subheader("Bitcoin Close Price Over Time")
-    chart_data = df[['Close']].copy()  # Select only 'Close' column for line chart
-    st.line_chart(chart_data)
-
     # Alternatively, you can display the scatter plot for Open vs Close prices:
     st.subheader("Open vs Close Price")
     # plt.figure(figsize=(10, 5))
@@ -58,23 +51,6 @@ with st.expander('Data Visualization'):
     plt.xticks(rotation=45)
     plt.tight_layout()
     st.pyplot(plt)
-
-    st.header('Bitcoin Candlestick Chart')
-    fig = go.Figure(data=[go.Candlestick(
-      x=df['Date'],
-      open=df['Open'],
-      high=df['High'],
-      low=df['Low'],
-      close=df['Close'],
-      increasing_line_color='green', 
-      decreasing_line_color='red'
-    )])
-    fig.update_layout(
-      title="Bitcoin Candlestick Chart",
-      xaxis_title="Date",
-      yaxis_title="Price (USD)",
-      xaxis_rangeslider_visible=False
-    )
     st.plotly_chart(fig)
 
 

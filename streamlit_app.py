@@ -58,11 +58,11 @@ with st.expander('Data Visualization'):
 # Input features
 with st.sidebar:
   st.header('Input features')
-  Open = st.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
-  High = st.slider('Bill length (mm)', 32.1, 59.6, 43.9)
-  Low = st.slider('Bill depth (mm)', 13.1, 21.5, 17.2)
-  Adj Close = st.slider('Flipper length (mm)', 172.0, 231.0, 201.0)
-  Volume = st.slider('Body mass (g)', 2700.0, 6300.0, 4207.0)
+  Open = st.slider('Open', 32.1, 59.6, 43.9)
+  High = st.slider('High', 32.1, 59.6, 43.9)
+  Low = st.slider('Low', 13.1, 21.5, 17.2)
+  Adj Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
+  Volume = st.slider('Volume', 2700.0, 6300.0, 4207.0)
   
 
 

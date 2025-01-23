@@ -69,13 +69,13 @@ with st.expander('Data Visualization'):
       increasing_line_color='green', 
       decreasing_line_color='red'
     )])
-  fig.update_layout(
-    title="Bitcoin Candlestick Chart",
-    xaxis_title="Date",
-    yaxis_title="Price (USD)",
-    xaxis_rangeslider_visible=False
-  )
-st.plotly_chart(fig)
+    fig.update_layout(
+      title="Bitcoin Candlestick Chart",
+      xaxis_title="Date",
+      yaxis_title="Price (USD)",
+      xaxis_rangeslider_visible=False
+    )
+    st.plotly_chart(fig)
 
 
 

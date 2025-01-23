@@ -94,9 +94,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 # y_test = y_test.values
 
 # # Create and train the model
-# model = LinearRegression()
-# model.fit(x_train, y_train)
-# y_pred = model.predict(x_test)
+model = LinearRegression()
+model.fit(x_train, y_train)
+y_pred = model.predict(x_test)
 
 # # Evaluate the model
 # mse = mean_squared_error(y_test, y_pred)

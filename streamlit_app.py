@@ -19,3 +19,17 @@ with st.expander('Data'):
   y = df['Close']
   y
 
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+with st.expander('Data visualization'):
+  numeric_df_train = df.select_dtypes(include=[np.number])
+
+  # Create the heatmap plot
+  plt.figure(figsize=(10, 8))
+  sns.heatmap(numeric_df_train.corr(), annot=True, cmap='coolwarm', fmt='.2f')
+  plt.title('Correlation Heatmap - Training Dataset')
+
+  # Display the plot in Streamlit
+  st.pyplot(plt)

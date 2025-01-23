@@ -89,11 +89,19 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Assuming df is your DataFrame
+df = pd.read_csv('your_data.csv')  # Replace 'your_data.csv' with your actual data file
+
 x = df.drop(columns=['Close'])
 y = df['Close']
 
 # Split the data
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+# Convert to numpy arrays
+x_train = x_train.values
+x_test = x_test.values
+y_train = y_train.values
+y_test = y_test.values
 
 # Create and train the model
 model = LinearRegression()

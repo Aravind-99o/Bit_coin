@@ -89,9 +89,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 
 
 # Data cleaning
-df = df.dropna()  # Drop rows with NaN values
-x = df.drop(columns=['Close'])
-y = df['Close']
+# df = df.dropna()  # Drop rows with NaN values
+# x = df.drop(columns=['Close'])
+# y = df['Close']
     
 # Ensure all data is numeric
 x = x.apply(pd.to_numeric, errors='coerce')

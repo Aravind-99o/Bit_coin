@@ -84,29 +84,29 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 
-# Split the data
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+# # Split the data
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
-# Convert to numpy arrays
-x_train = x_train.values
-x_test = x_test.values
-y_train = y_train.values
-y_test = y_test.values
+# # Convert to numpy arrays
+# x_train = x_train.values
+# x_test = x_test.values
+# y_train = y_train.values
+# y_test = y_test.values
 
-# Create and train the model
-model = LinearRegression()
-model.fit(x_train, y_train)
-y_pred = model.predict(x_test)
+# # Create and train the model
+# model = LinearRegression()
+# model.fit(x_train, y_train)
+# y_pred = model.predict(x_test)
 
-# Evaluate the model
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
+# # Evaluate the model
+# mse = mean_squared_error(y_test, y_pred)
+# r2 = r2_score(y_test, y_pred)
 
-print(f'Mean Squared Error: {mse}')
-print(f'R^2 Score: {r2}')
-
-
+# print(f'Mean Squared Error: {mse}')
+# print(f'R^2 Score: {r2}')
 
 
-# Display predicted species
-st.subheader('Predicted Closing Price')
+
+
+# # Display predicted species
+# st.subheader('Predicted Closing Price')

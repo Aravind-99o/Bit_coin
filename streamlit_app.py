@@ -8,5 +8,5 @@ st.info(' This project aims to predict the future price of Bitcoin using machine
 
 with st.expander('Data'):
   st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+  df = pd.read_csv('BTC-USD_stock_data.csv')
   df

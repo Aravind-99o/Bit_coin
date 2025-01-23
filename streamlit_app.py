@@ -87,6 +87,49 @@ from sklearn.metrics import mean_squared_error, r2_score
 # # Split the data
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
+
+# Data cleaning
+df = df.dropna()  # Drop rows with NaN values
+x = df.drop(columns=['Close'])
+y = df['Close']
+    
+# Ensure all data is numeric
+x = x.apply(pd.to_numeric, errors='coerce')
+y = pd.to_numeric(y, errors='coerce')
+    
+# Data cleaning
+    df = df.dropna()  # Drop rows with NaN values
+    
+    # Ensure all data is numeric
+    x = x.apply(pd.to_numeric, errors='coerce')
+    y = pd.to_numeric(y, errors='coerce')
+    
+    # Check for NaN values after conversion
+    if x.isnull().any().any() or y.isnull().any():
+        st.write("Data contains NaN values after conversion to numeric. Please check your data.")
+    else:
+        # Split the data
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+        # Convert to numpy arrays
+        x_train = x_train.values
+        x_test = x_test.values
+        y_train = y_train.values
+        y_test = y_test.values
+
+        # Create and train the model
+        model = LinearRegression()
+        model.fit(x_train, y_train)
+        y_pred = model.predict(x_test)
+
+        # Evaluate the model
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+
+        st.write(f'Mean Squared Error: {mse}')
+        st.write(f'R^2 Score: {r2}')
+else:
+    st.write("Please upload a CSV file.")
 # # Convert to numpy arrays
 # x_train = x_train.values
 # x_test = x_test.values
@@ -94,9 +137,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 # y_test = y_test.values
 
 # # Create and train the model
-model = LinearRegression()
-model.fit(x_train, y_train)
-y_pred = model.predict(x_test)
+# model = LinearRegression()
+# model.fit(x_train, y_train)
+# y_pred = model.predict(x_test)
 
 # # Evaluate the model
 # mse = mean_squared_error(y_test, y_pred)

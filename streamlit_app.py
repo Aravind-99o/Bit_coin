@@ -63,7 +63,15 @@ with st.sidebar:
   Low = st.slider('Low', 13.1, 21.5, 17.2)
   Adj_Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
   Volume = st.slider('Volume', 2700.0, 6300.0, 4207.0)
-  
+
+
+
+with st.expander('Input features'):
+  st.write('**Input penguin**')
+  input_df
+  st.write('**Combined penguins data**')
+  input_penguins
+
 
 
 

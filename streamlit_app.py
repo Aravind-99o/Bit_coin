@@ -79,6 +79,30 @@ with st.expander('Input features'):
   input_df
 
 
+x=df.drop(['Close'],axis=1)
+x
+
+y=df['Close']
+y
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+x_train
+
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(x_train,y_train)
+y_pred=model.predict(x_test)
+y_pred
+
+from sklearn.metrics import mean_squared_error, r2_score
+
+mse = mean_squared_error(y_test, y_pred)
+mse
+
+r2 = r2_score(y_test,y_pred)
+r2
+
 
 
 

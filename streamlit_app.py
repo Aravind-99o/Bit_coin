@@ -98,7 +98,7 @@ x = x.apply(pd.to_numeric, errors='coerce')
 y = pd.to_numeric(y, errors='coerce')
     
 # Data cleaning
-    df = df.dropna()  # Drop rows with NaN values
+    # df = df.dropna()  # Drop rows with NaN values
     
     # Ensure all data is numeric
     x = x.apply(pd.to_numeric, errors='coerce')

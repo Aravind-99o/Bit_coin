@@ -1,11 +1,10 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
 
-st.title('🤖 Machine Learning App')
+st.title('Bitcoin Price Prediction')
 
-st.info('This is app builds a machine learning model!')
+st.info(' This project aims to predict the future price of Bitcoin using machine learning techniques.')
 
 with st.expander('Data'):
   st.write('**Raw data**')

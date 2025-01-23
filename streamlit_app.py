@@ -88,8 +88,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# Assuming df is your DataFrame
-df = pd.read_csv('your_data.csv')  # Replace 'your_data.csv' with your actual data file
 
 x = df.drop(columns=['Close'])
 y = df['Close']

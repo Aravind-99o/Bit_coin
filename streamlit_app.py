@@ -64,6 +64,14 @@ with st.sidebar:
   Adj_Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
   Volume = st.slider('Volume', 2700.0, 6300.0, 4207.0)
 
+    # Create a DataFrame for the input features
+  data = {'Open': Open,
+          'High': High,
+          'Adj Close': Adj_Close,
+          'Volume': Volume}
+  input_df = pd.DataFrame(data, index=[0])
+
+
 
 
 with st.expander('Input features'):

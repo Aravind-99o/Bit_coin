@@ -21,20 +21,9 @@ with st.expander('Data'):
 
 
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-with st.expander('Data visualization'):
 
-
-
-
-  # Plot a line graph of Bitcoin Closing prices over time
-  st.subheader("Bitcoin Close Price Over Time")
-  plt.figure(figsize=(10, 5))
-  sns.lineplot(x=df.index, y=df['Close'], label='Close Price', color='b')
-  plt.title("Bitcoin Close Price Over Time")
-  plt.xlabel("Date")
-  plt.ylabel("Close Price (USD)")
-  plt.xticks(rotation=45)
-  plt.tight_layout()
-  st.pyplot(plt)
+with st.expander('Data Visualization'):
+    # Display a line chart for Bitcoin Close prices over time
+    st.subheader("Bitcoin Close Price Over Time")
+    chart_data = df[['Close']].copy()  # Select only 'Close' column for line chart
+    st.line_chart(chart_data)

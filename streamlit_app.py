@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+import seaborn as sns
+
 st.title('Bitcoin Price Prediction')
 
 st.info(' This project aims to predict the future price of Bitcoin using machine learning techniques.')

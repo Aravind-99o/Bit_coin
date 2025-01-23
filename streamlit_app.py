@@ -61,7 +61,7 @@ with st.sidebar:
   Open = st.slider('Open', 32.1, 59.6, 43.9)
   High = st.slider('High', 32.1, 59.6, 43.9)
   Low = st.slider('Low', 13.1, 21.5, 17.2)
-  Adj Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
+  Adj_Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
   Volume = st.slider('Volume', 2700.0, 6300.0, 4207.0)
   
 

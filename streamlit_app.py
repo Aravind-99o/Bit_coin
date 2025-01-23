@@ -83,3 +83,5 @@ with st.expander('Input features'):
 
 
 
+# Display predicted species
+st.subheader('Predicted Closing Price')

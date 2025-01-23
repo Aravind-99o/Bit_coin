@@ -36,7 +36,7 @@ with st.expander('Data Visualization'):
 
     # Alternatively, you can display the scatter plot for Open vs Close prices:
     st.subheader("Open vs Close Price")
-    plt.figure(figsize=(10, 5))
+    # plt.figure(figsize=(10, 5))
     sns.scatterplot(x=df['Open'], y=df['Close'], color='red')
     plt.title("Open vs Close Price")
     plt.xlabel("Open Price (USD)")

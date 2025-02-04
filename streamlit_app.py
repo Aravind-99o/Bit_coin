@@ -1,155 +1,198 @@
+import os
 import streamlit as st
-import numpy as np
 import pandas as pd
+import pickle
+import numpy as np
 
-import seaborn as sns
-import matplotlib.pyplot as plt
+with open('bitcoin.pkl', "rb") as file:
+    data = pickle.load(file)
 
-
-st.title('Bitcoin Price Prediction')
-
-st.info(' This project aims to predict the future price of Bitcoin using machine learning techniques.')
-
-with st.expander('Data'):
-  st.write('**Raw data**')
-  df = pd.read_csv('BTC-USD_stock_data.csv')
-  df
-
-  st.write('**X**')
-  x = df.drop(['Close'],axis=1)
-  x
-
-  st.write('**y**')
-  y = df['Close']
-  y
+flag=0
 
 
+  # Local image path
+logo_path = "C:/aravind/data_science/ML_project/bitcoin-logo-icon.webp"
+
+  # Read and encode the image to display in HTML
+import base64
+def get_base64_image(image_path):
+      with open(image_path, "rb") as img_file:
+          return base64.b64encode(img_file.read()).decode()
+
+logo_base64 = get_base64_image(logo_path)
+
+  # HTML & CSS to align the image with the title
+st.markdown(
+    f"""
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <img src="data:image/webp;base64,{logo_base64}" width="100" style="margin-right: 5px;">
+        <h1 style="margin: 0;">Bitcoin (BTC) Price</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
-with st.expander('Data Visualization'):
-    # Display a line chart for Bitcoin Close prices over time
-    st.subheader("Bitcoin Close Price Over Time")
-    chart_data = df[['Close']].copy()  # Select only 'Close' column for line chart
-    st.line_chart(chart_data)
-
-    # Alternatively, you can display the scatter plot for Open vs Close prices:
-    st.subheader("Open vs Close Price")
-    # plt.figure(figsize=(10, 5))
-    sns.scatterplot(x=df['Open'], y=df['Close'], color='red')
-    plt.title("Open vs Close Price")
-    plt.xlabel("Open Price (USD)")
-    plt.ylabel("Close Price (USD)")
-    st.pyplot(plt)
-
-    # Line plot for 'Volume' over time (optional)
-    st.subheader("Bitcoin Trading Volume Over Time")
-    plt.figure(figsize=(10, 5))
-    sns.lineplot(x=df.index, y=df['Volume'], label='Volume', color='g')
-    plt.title("Bitcoin Trading Volume Over Time")
-    plt.xlabel("Date")
-    plt.ylabel("Volume")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    st.pyplot(plt)
-    # st.plotly_chart(fig)
+st.info('This project aims to predict the future price of Bitcoin using machine learning techniques.')
 
 
 
-# Input features
+
+
+
 with st.sidebar:
   st.header('Input features')
-  Open = st.slider('Open', 32.1, 59.6, 43.9)
-  High = st.slider('High', 32.1, 59.6, 43.9)
-  Low = st.slider('Low', 13.1, 21.5, 17.2)
-  Adj_Close = st.slider('Adj Close', 172.0, 231.0, 201.0)
-  Volume = st.slider('Volume', 2700.0, 6300.0, 4207.0)
 
-    # Create a DataFrame for the input features
-  data = {'Open': Open,
-          'High': High,
-          'Adj Close': Adj_Close,
-          'Volume': Volume}
-  input_df = pd.DataFrame(data, index=[0])
+  Open = st.number_input('Open', value=87371.22)
+  High = st.number_input('High', value=96536.95)
+  Low = st.number_input('Low', value=84908.25)
+  Volume = st.number_input('Volume',value=86288)
 
+  Volume=Volume/1000
+  
 
-
-
-with st.expander('Input features'):
-  st.write('**Input**')
-  input_df
-
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-
-
-# # Split the data
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-
-
-# Data cleaning
-# df = df.dropna()  # Drop rows with NaN values
-# x = df.drop(columns=['Close'])
-# y = df['Close']
-    
-# Ensure all data is numeric
-x = x.apply(pd.to_numeric, errors='coerce')
-y = pd.to_numeric(y, errors='coerce')
-    
-# Data cleaning
-    # df = df.dropna()  # Drop rows with NaN values
-    
-    # Ensure all data is numeric
-    x = x.apply(pd.to_numeric, errors='coerce')
-    y = pd.to_numeric(y, errors='coerce')
-    
-    # Check for NaN values after conversion
-    if x.isnull().any().any() or y.isnull().any():
-        st.write("Data contains NaN values after conversion to numeric. Please check your data.")
-    else:
-        # Split the data
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-
-        # Convert to numpy arrays
-        x_train = x_train.values
-        x_test = x_test.values
-        y_train = y_train.values
-        y_test = y_test.values
-
-        # Create and train the model
-        model = LinearRegression()
-        model.fit(x_train, y_train)
-        y_pred = model.predict(x_test)
-
-        # Evaluate the model
-        mse = mean_squared_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
-
-        st.write(f'Mean Squared Error: {mse}')
-        st.write(f'R^2 Score: {r2}')
-else:
-    st.write("Please upload a CSV file.")
-# # Convert to numpy arrays
-# x_train = x_train.values
-# x_test = x_test.values
-# y_train = y_train.values
-# y_test = y_test.values
-
-# # Create and train the model
-# model = LinearRegression()
-# model.fit(x_train, y_train)
-# y_pred = model.predict(x_test)
-
-# # Evaluate the model
-# mse = mean_squared_error(y_test, y_pred)
-# r2 = r2_score(y_test, y_pred)
-
-# print(f'Mean Squared Error: {mse}')
-# print(f'R^2 Score: {r2}')
+  if st.button("Predict", type="primary"):
+     flag=1
 
 
 
 
-# # Display predicted species
-# st.subheader('Predicted Closing Price')
+input_data = [[Open,High,Low,Volume]]  
+# Create a 2D array with one row 
+
+dat = {
+    'Open': [Open],
+    'High': [High],
+    'Low': [Low],
+    'Volume': [Volume]
+}
+
+df = pd.DataFrame(dat)
+
+# Format Open, High, and Low columns with $ sign
+df['Open'] = df['Open'].map(lambda x: f"$ {x:,.2f}")
+df['High'] = df['High'].map(lambda x: f"$ {x:,.2f}")
+df['Low'] = df['Low'].map(lambda x: f"$ {x:,.2f}")
+
+# Display DataFrame and fit it to the screen width
+st.write("DataFrame with Input Values (formatted with $):")
+st.dataframe(df, use_container_width=True)
+
+
+
+
+if flag==1:
+  res = data.predict(input_data)  # Pass the formatted data to predict()
+
+  number = res[0]
+  rounded_number = round(number, 2)
+
+  old_value = Open
+  new_value = rounded_number
+
+  percentage_change = ((new_value - old_value) / old_value) * 100
+
+  
+
+
+
+
+
+
+  
+  # st.title('  Price Prediction')
+ 
+
+  st.title(f"{rounded_number} USD")
+
+
+  diff=round(rounded_number-Open,2)
+
+
+  if percentage_change < 0:
+    logo_path = "C:/aravind/data_science/ML_project/R.png"
+
+    # Read and encode the image to display in HTML
+    import base64
+    def get_base64_image(image_path):
+          with open(image_path, "rb") as img_file:
+              return base64.b64encode(img_file.read()).decode()
+
+    logo_base64 = get_base64_image(logo_path)
+
+      # HTML & CSS to align the image with the title
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="data:image/webp;base64,{logo_base64}" width="20" style="margin-right: 5px;">
+            <h2 style="margin: 0; color: red;">{diff} ({percentage_change  :.2f})%</h2>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+  if percentage_change > 0:
+    logo_path = "C:/aravind/data_science/ML_project/R.jpg"
+
+    # Read and encode the image to display in HTML
+    import base64
+    def get_base64_image(image_path):
+          with open(image_path, "rb") as img_file:
+              return base64.b64encode(img_file.read()).decode()
+
+    logo_base64 = get_base64_image(logo_path)
+
+      # HTML & CSS to align the image with the title
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="data:image/webp;base64,{logo_base64}" width="20" style="margin-right: 5px;">
+            <h2 style="margin: 0; color: #00ff00;">{diff} ({percentage_change  :.2f})%</h2>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+
+
+  import pandas as pd
+  import plotly.graph_objects as go
+  import streamlit as st
+
+  # Load the dataset
+  file_path = "Bitcoin Historical Data.csv"  # Update with your file path
+  df = pd.read_csv(file_path)
+
+  # Convert Date column to datetime format and sort data
+  df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+  df = df.sort_values(by='Date')
+
+  # Convert price-related columns to numeric values
+  cols_to_convert = ['Price', 'Open', 'High', 'Low']
+  df[cols_to_convert] = df[cols_to_convert].replace(',', '', regex=True).astype(float)
+
+  # Create a candlestick chart
+  fig = go.Figure(data=[go.Candlestick(
+      x=df['Date'],
+      open=df['Open'],
+      high=df['High'],
+      low=df['Low'],
+      close=df['Price'],
+      name="Bitcoin"
+  )])
+
+  # Update layout
+  fig.update_layout(
+      title="Bitcoin Price Candlestick Chart",
+      xaxis_title="Date",
+      yaxis_title="Price (USD)",
+      xaxis_rangeslider_visible=False,
+      template="plotly_dark",
+      width=1000,
+      height=600
+  )
+
+  # Show the chart within Streamlit (on the same page)
+  st.plotly_chart(fig)
